@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../resources/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Sambit Kumar Das - Portfolio</title>
+</head>
+<style>
+    body {
+        background: linear-gradient(93deg, rgba(23, 18, 112, 1) 0%, rgba(0, 0, 0, 1) 54%, rgba(21, 21, 194, 1) 100%);
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        box-sizing: border-box;
+    }
+
+    header {
+        position: relative;
+        text-align: center;
+        padding: 3rem 0;
+        color: #fff;
+    }
+
+    #home {
+        min-height: 100vh;
+    }
+
+    .project-container {
+        max-width: 1000px;
+        margin: 200px auto;
+        padding: 0 1.5rem;
+    }
+
+    .profile {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        border: 5px solid #ac990a;
+        margin-bottom: 1rem;
+        transition: all 0.5s ease-in-out;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .profile:hover {
+        border: 5px solid #fff;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: #dbc416;
+    }
+
+    .name {
+        color: #ffffff;
+    }
+
+    .sub-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: #ffffff;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #ffffff;
+        margin-right: 1rem;
+        font-size: 1.2rem;
+        transition: all 0.5s ease-in-out;
+    }
+
+    nav a:hover {
+        color: #dbc416;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #biodata,
+    #project,
+    #contact {
+        min-height: 100vh;
+        padding: 3rem 0;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .about-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .about-container h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #09eb09;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+
+    .about-content {
+        padding: 1.5rem;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        text-align: start;
+    }
+
+    .about-name {
+        font-weight: bold;
+        color: #e7eb09;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .skills {
+        padding: 3rem 0;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .skills h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #09eb09;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        /* Equal height columns */
+        gap: 2rem;
+    }
+
+    .skills-column {
+        flex: 1 1 300px;
+        /* Responsive but equal width basis */
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.5rem;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        text-align: start;
+    }
+
+    .skills-column h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #e5b412;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .skill-item {
+        margin-bottom: 0.5rem;
+    }
+
+    .skill-name {
+        font-weight: bold;
+        color: #c2d0d0;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .skill-bar {
+        width: 100%;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        margin-top: 0.5rem;
+    }
+
+    .skill-progress {
+        height: 100%;
+        background-color: #bf0b62;
+        border-radius: 5px;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .project-card {
+        padding: 1.5rem;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        text-align: start;
+    }
+
+    .project-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #e5b412;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .project-card p {
+        margin-bottom: 0.5rem;
+    }
+
+    .project-card .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .project-card .btn,
+    .project-card .btn-outline {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .project-card .btn {
+        background-color: #bf0b62;
+        color: #ffffff;
+    }
+
+    .project-card .btn-outline {
+        border: 2px solid #bf0b62;
+        color: #ffffff;
+        background-color: transparent;
+    }
+
+    .project-card .btn:hover,
+    .project-card .btn-outline:hover {
+        background-color: #bf0b62;
+    }
+
+    .project-card .project-img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .contact-form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        text-align: start;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+    }
+
+    .contact-form textarea {
+        resize: vertical;
+    }
+
+    .contact-form button {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        background-color: #bf0b62;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+        background-color: #bf0b62;
+    }
+
+    .contact-info {
+        margin-top: 2rem;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .contact-item h3 {
+        color: #e5d012;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        color: #ffffff;
+    }
+
+    .social-links a {
+        margin: 0 1rem;
+        font-size: 1.5rem;
+        color: #ffffff;
+    }
+
+    .social-links a:hover i {
+        color: #bf0b62;
+    }
+
+    footer {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        text-align: center;
+        color: #ffffff;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 5px 5px 0 0;
+    }
+
+
+    /* ✅ Media Queries */
+
+    @media screen and (max-width: 932px) {
+        .navbar {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar a {
+            margin: 0.5rem 0;
+        }
+
+        .about-container,
+        .projects-grid,
+        .contact-form,
+        .form {
+            max-width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 588px) {
+        .skills-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .skills-column {
+            max-width: 50%;
+            min-height: 400px;
+            overflow: hidden;
+        }
+
+        @media screen and (max-width: 576px) {
+            .skills-column {
+                max-width: 95%;
+                height: 250px;
+                overflow: hidden;
+            }
+
+            .skills-column h3,
+            .skill-item,
+            .skill-name,
+            .skill-bar {
+                padding: 0.3rem 0;
+                margin: 0;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .skills-column {
+                height: 220px;
+                padding: 1rem;
+            }
+
+            .skill-name {
+                font-size: 0.85rem;
+            }
+
+            .skills h2 {
+                font-size: 1.6rem;
+            }
+        }
+    }
+</style>
+
+<body>
+    <section id="home">
+        <header>
+            <div class="container">
+                <img class="profile" src="../image/WhatsApp Image 2025-03-05 at 19.47.16_17678e77.jpg" alt="">
+                <h1> <span class="name">Sambit </span> Kumar Das</h1>
+                <p class="sub-title"> Full Stack Web Developer </p>
+                <div class="nav">
+                    <nav class="nav-bar">
+                        <a href="#biodata" class="btn"> About me! </a>
+                        <a href="#project" class="btn"> My Projects </a>
+                        <a href="#contact" class="btn"> Contact me! </a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </section>
+    <section id="biodata">
+        <div class="about-container">
+            <h2> About Me </h2>
+            <div class="about-content">
+                <p>
+                    Hello! I'm <span class="about-name">Sambit Kumaar Das </span>, a passionate web developer with over
+                    2 years of experience creating
+                    beautiful, functional websites and applications. I specialize in front-end development with
+                    expertise in
+                    React, Vue.js, and modern CSS techniques.
+                </p>
+                My journey in tech began when I built my first website at 20, and I've been hooked ever since. What
+                makes me unique is my combination of technical skills and design sensibility, allowing me to bridge the
+                gap between functionality and aesthetics.
+                <p>
+                    When I'm not coding, you can find me hiking in the mountains, experimenting with photography, or
+                    exploring new coffee shops in my city.
+                </p>
+            </div>
+            <div class="skills">
+                <h2>Skills & Expertise</h2>
+                <div class="skills-container">
+                    <div class="skills-column">
+                        <div class="skill-category">
+                            <h3>Frontend Development</h3>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>HTML/CSS</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>JavaScript</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>React</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-column">
+                        <div class="skill-category">
+                            <h3>Backend Development</h3>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>Node.js</span>
+                                    <span>60%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>Express</span>
+                                    <span>55%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 55%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>MongoDB</span>
+                                    <span>50%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-column">
+                        <div class="skill-category" id="design">
+                            <h3>Design & Tools</h3>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>UI/UX Design</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>Figma</span>
+                                    <span>60%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span>Git</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="project">
+        <div class="project-container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                        alt="E-commerce Platform" class="project-img">
+                    <div class="project-info">
+                        <h3>E-commerce Platform</h3>
+                        <p>A full-featured online store built with React, Node.js, and MongoDB. Includes product
+                            catalog, shopping cart, and payment processing.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn">Live Demo</a>
+                            <a href="#" class="btn btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                        alt="Task Management App" class="project-img">
+                    <div class="project-info">
+                        <h3>Task Management App</h3>
+                        <p>A productivity application for organizing tasks and projects. Built with Vue.js and Firebase
+                            for real-time updates across devices.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn">Live Demo</a>
+                            <a href="#" class="btn btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                        alt="Travel Blog" class="project-img">
+                    <div class="project-info">
+                        <h3>Travel Blog</h3>
+                        <p>A responsive travel blog with custom CMS built with Gatsby.js and Contentful. Features
+                            beautiful photography and interactive maps.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn">Live Demo</a>
+                            <a href="#" class="btn btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="form">
+            <h2>Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject">
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                    <h3>Email</h3>
+                    <p>sambitdas296@gmail.com</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div>
+                    <h3>Phone</h3>
+                    <p>+91 93484 54195</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <h3>Location</h3>
+                    <p>Odisha, India</p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://github.com/sambitdas666" class="social-link" target="_blank"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/sambit-kumar-das-64b979274?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3ByeHMUlzzRWmQkYjJgybsXA%3D%3D"
+                        class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://x.com/AsusRog99581/likes" class="social-link" target="_blank"><i
+                            class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/lalalas_m?igsh=MTg1eHZwb3ZwNDByYQ==" class="social-link"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+                <p>&copy; 2023 Sambit Kumar Das. All rights reserved.</p>
+            </div>
+        </footer>
+    </section>
+</body>
+<script>
+    // Form submission
+    const contactForm = document.getElementById('contactForm');
+
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Here you would typically send the form data to a server
+        // For this example, we'll just show an alert
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+    });
+
+
+</script>
+
+</html>
