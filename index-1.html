@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avocado Toast Recipe</title>
+    <style>
+        :root {
+            --primary: #b4a30e;
+            --secondary: #050505;
+            --accent: #75064e;
+            --text: #333;
+            --light: #fff;
+            --dark: #333;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(115deg, #262935, #b30938);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .recipe-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .recipe-header {
+            background-color: white;
+            border-radius: 16px 16px 0 0;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recipe-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background-color: var(--accent);
+        }
+
+        .recipe-title {
+            font-family: 'DM Serif Display', serif;
+            color: var(--primary);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .recipe-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .recipe-description {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-weight: 300;
+            max-width: 80%;
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 350px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .recipe-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+        }
+
+        .recipe-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .recipe-meta {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .recipe-content {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .ingredients-section,
+        .steps-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent);
+            border-radius: 4px;
+        }
+
+        .ingredients-list {
+            list-style: none;
+        }
+
+        .ingredient-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(74, 107, 87, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .ingredient-item:hover {
+            transform: translateX(5px);
+            border-bottom-color: var(--accent);
+        }
+
+        .ingredient-checkbox {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .ingredient-checkbox:checked {
+            background-color: var(--primary);
+        }
+
+        .ingredient-checkbox:checked::after {
+            content: ' ';
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .steps-list {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .step-item {
+            padding: 20px 0 20px 40px;
+            position: relative;
+            border-bottom: 1px dashed rgba(74, 107, 87, 0.2);
+        }
+
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 20px;
+            width: 28px;
+            height: 28px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .step-item.active {
+            background-color: rgba(247, 233, 212, 0.3);
+            border-radius: 8px;
+            margin: 0 -20px;
+            padding: 20px 20px 20px 60px;
+        }
+
+        .step-item.active::before {
+            background-color: var(--accent);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .cooking-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #3a5847;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(74, 107, 87, 0.1);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(74, 107, 87, 0.1);
+            border-radius: 3px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transition: width 0.5s ease;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .recipe-content {
+                flex-direction: column;
+            }
+
+            .recipe-title {
+                font-size: 2.2rem;
+            }
+
+            .recipe-description {
+                max-width: 100%;
+            }
+
+            .recipe-image {
+                height: 250px;
+            }
+
+            .recipe-meta {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="recipe-container">
+        <div class="recipe-header">
+            <h1 class="recipe-title">Avocado Toast</h1>
+            <p class="recipe-description">A simple yet delicious breakfast featuring creamy avocado on toasted artisan bread with customizable toppings.</p>
+
+            <div class="recipe-image">
+                <img src="https://horizon.com/wp-content/uploads/cheesy-avocado-toast-recipe.jpg" alt="Avocado Toast">
+            </div>
+
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <div class="meta-icon"></div>
+                    <span>Prep: 10 mins</span>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-icon"></div>
+                    <span>Cook: 5 mins</span>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-icon"></div>
+                    <span>Servings: 2</span>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-icon"> </div>
+                    <span>Difficulty: Easy</span>
+                </div>
+            </div>
+
+            <div class="tags">
+                <span class="tag">Vegetarian</span>
+                <span class="tag">Quick Meal</span>
+                <span class="tag">Breakfast</span>
+                <span class="tag">Healthy</span>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="recipe-content">
+            <div class="ingredients-section">
+                <h2 class="section-title">Ingredients</h2>
+                <ul class="ingredients-list">
+                    <li class="ingredient-item">
+                        <input type="checkbox" class="ingredient-checkbox" id="ing1">
+                        <label for="ing1">2 slices artisan bread (sourdough recommended)</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input type="checkbox" class="ingredient-checkbox" id="ing2">
+                        <label for="ing2">1 ripe avocado</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input type="checkbox" class="ingredient-checkbox" id="ing3">
+                        <label for="ing3">1/2 lemon, juiced</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input type="checkbox" class="ingredient-checkbox" id="ing4">
+                        <label for="ing4">Salt and pepper to taste</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input type="checkbox" class="ingredient-checkbox" id="ing5">
+                        <label for="ing5">Red pepper flakes (optional)</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input type="checkbox" class="ingredient-checkbox" id="ing6">
+                        <label for="ing6">2 eggs (optional)</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input type="checkbox" class="ingredient-checkbox" id="ing7">
+                        <label for="ing7">Microgreens or sprouts for garnish</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="steps-section">
+                <h2 class="section-title">Instructions</h2>
+                <ol class="steps-list">
+                    <li class="step-item">Toast the bread slices until golden and crisp.</li>
+                    <li class="step-item">Cut the avocado in half, remove the pit, and scoop the flesh into a bowl.</li>
+                    <li class="step-item">Add lemon juice, salt, and pepper to the avocado. Mash with a fork to your desired consistency.</li>
+                    <li class="step-item">Spread the avocado mixture evenly on the toasted bread.</li>
+                    <li class="step-item">If adding eggs, fry or poach them while the bread toasts and place on top.</li>
+                    <li class="step-item">Sprinkle with red pepper flakes if desired and garnish with microgreens.</li>
+                    <li class="step-item">Serve immediately and enjoy!</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="cooking-controls">
+            <button class="btn btn-primary" id="startCookingBtn">
+                <span>Start Cooking</span>
+                <span> </span>
+            </button>
+            <button class="btn btn-outline hidden" id="nextStepBtn">
+                <span>Next Step</span>
+                <span> </span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const startCookingBtn = document.getElementById('startCookingBtn');
+            const nextStepBtn = document.getElementById('nextStepBtn');
+            const progressBar = document.getElementById('progressBar');
+            const steps = document.querySelectorAll('.step-item');
+            const totalSteps = steps.length;
+            let currentStep = 0;
+
+            // Initialize checkboxes to trigger animations
+            const checkboxes = document.querySelectorAll('.ingredient-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const label = this.nextElementSibling;
+                    if (this.checked) {
+                        label.style.textDecoration = 'line-through';
+                        label.style.opacity = '0.7';
+                    } else {
+                        label.style.textDecoration = 'none';
+                        label.style.opacity = '1';
+                    }
+                });
+            });
+
+            // Start cooking functionality
+            startCookingBtn.addEventListener('click', function () {
+                // Reset any previous cooking session
+                steps.forEach(step => step.classList.remove('active'));
+                currentStep = 0;
+
+                // Highlight first step
+                if (steps.length > 0) {
+                    steps[currentStep].classList.add('active');
+                    updateProgressBar();
+                }
+
+                // Show next button and hide start button
+                startCookingBtn.classList.add('hidden');
+                nextStepBtn.classList.remove('hidden');
+
+                // Scroll to first step
+                steps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+
+            // Next step functionality
+            nextStepBtn.addEventListener('click', function () {
+                // Remove highlight from current step
+                steps[currentStep].classList.remove('active');
+
+                // Move to next step
+                currentStep++;
+
+                if (currentStep < steps.length) {
+                    // Highlight next step
+                    steps[currentStep].classList.add('active');
+                    updateProgressBar();
+
+                    // Scroll to the current step
+                    steps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    // Cooking complete
+                    nextStepBtn.innerHTML = '<span>Finished!</span> <span></span>';
+                    nextStepBtn.disabled = true;
+                    progressBar.style.width = '100%';
+
+                    // Reset after a delay
+                    setTimeout(() => {
+                        nextStepBtn.classList.add('hidden');
+                        startCookingBtn.classList.remove('hidden');
+                        nextStepBtn.innerHTML = '<span>Next Step</span> <span> </span>';
+                        nextStepBtn.disabled = false;
+                        progressBar.style.width = '0%';
+                    }, 3000);
+                }
+            });
+
+            // Update progress bar based on current step
+            function updateProgressBar() {
+                const progressPercentage = (currentStep / totalSteps) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+            }
+        });
+    </script>
+</body>
+</html>
